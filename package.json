@@ -5,17 +5,23 @@
   "author": "",
   "scripts": {
     "dev:client": "poi --serve",
-    "dev:server": "nodemon -r dotenv/config ./server",
+    "dev:server": "nodemon -r ./server",
     "webpack:inspect-bundle": "poi --inspect-webpack",
     "webpack:bundle-report": "poi --prod --bundle-report",
     "build": "poi --prod",
-    "start": "node -r dotenv/config ./server"
+    "start": "node -r dotenv/config ./server",
+    "db:init": "node -r dotenv/config ./server/database/scripts/init.js"
   },
   "main": "index.js",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "core-js": "^3.6.4",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "pg": "^8.0.2",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.6",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6",
     "vuetify": "^2.2.11",
