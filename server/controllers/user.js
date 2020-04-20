@@ -48,22 +48,68 @@ router.use('/login', async(req, res) => {
   const passwordHash = await hashPassword(password);
   if(user.passwordHash === passwordHash){
     const secret = process.env.JWT_SECRET;
-    const token = jwt.sign({
+    const acessToken = jwt.sign({
       id: user.id,
       username: user.username
     }, secret, {
-      expiresIn: '5h'
+      expiresIn: '15m'
+    });
+    const refreshToken = jwt.sign({
+      id: user.id,
+      username: user.username
+    }, secret, {
+      expiresIn: '7d'
+    });
+    res.cookie('refreshToken', refreshToken, {
+      maxAge: 7*24*60*60*1000,
+      httpOnly: true
     });
     return res.json({
       username: user.username,
-      token
+      token: acessToken
     })
   }
   else
     return res.status(400).send('Invalid username/password combination');
 });
 
-router.use('/profile', auth, async(req, res) => {
+router.get('/logout', (req, res) =>{
+  res.clearCookie('refreshToken');
+  return res.end();
+})
+
+router.get('/refresh', (req, res) => {
+  const refreshToken = req.cookies.refreshToken;
+  if(!refreshToken)
+    return res.status(401).send('No refresh token found');
+  const secret = process.env.JWT_SECRET;
+  jwt.verify(refreshToken, secret, (err, data) => {
+    if(err)
+      return res.status(401).send('Bad token');
+    const { id, username } = data;
+    const acessToken = jwt.sign({
+      id,
+      username
+    }, secret, {
+      expiresIn: '15m'
+    });
+    const newRefreshToken = jwt.sign({
+      id,
+      username
+    }, secret, {
+      expiresIn: '7d'
+    });
+    res.cookie('refreshToken', newRefreshToken, {
+      maxAge: 7*24*60*60*1000,
+      httpOnly: true
+    });
+    return res.json({
+      token: acessToken
+    });
+  });
+});
+
+router.get('/profile', auth, async(req, res) => {
   const { id } = req.user;
   const user = await User.findOne({
     where: {
