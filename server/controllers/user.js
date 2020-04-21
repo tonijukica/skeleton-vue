@@ -65,7 +65,10 @@ router.use('/login', async(req, res) => {
       httpOnly: true
     });
     return res.json({
-      username: user.username,
+      user: {
+        id: user.id,
+        username: user.username
+      },
       token: acessToken
     })
   }
