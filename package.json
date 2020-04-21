@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@mdi/font": "^5.1.45",
     "@poi/plugin-bundle-report": "^12.1.2",
     "@types/poi": "^12.5.0",
     "@types/webpack": "^4.41.0",
