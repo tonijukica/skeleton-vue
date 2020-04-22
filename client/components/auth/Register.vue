@@ -36,7 +36,7 @@
             label="Password"
             placeholder="Password"
             outlined />
-          <v-btn class='btn' color="secondary">
+          <v-btn class='btn' color="secondary" @click="submitRegister">
             Register
           </v-btn>
         </v-sheet>
@@ -46,13 +46,28 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: 'register',
   data: () => ({
     username: '',
     email: '',
     password: ''
-  })
+  }),
+  methods: {
+    ...mapActions(['register']),
+    submitRegister() {
+      this.register({
+        username: this.username,
+        email: this.email,
+        password: this.password
+      })
+      .then(() => {
+        this.$router.push('login');
+      })
+      .catch((err) => console.log(err.message))
+    }
+  }
 }
 </script>
 

@@ -28,10 +28,10 @@
             label="Password"
             placeholder="Password"
             outlined />
-          <v-btn class='btn' color="primary">
+          <v-btn class='btn' color="primary" :disabled="!username || !password" @click="userLogin">
             Log in
           </v-btn>
-          <v-btn class='btn' color="secondary">
+          <v-btn class='btn' color="secondary" @click="redirect">
             Register
           </v-btn>
         </v-sheet>
@@ -41,12 +41,24 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: 'login',
   data: () => ({
     username: '',
     password: ''
-  })
+  }),
+  methods:  {
+    ...mapActions(['login']),
+    userLogin() {
+      this.login({ username: this.username, password: this.password})
+        .then(() => this.$router.push('/profile'))
+        .catch((err) => console.log(err))
+    },
+    redirect() {
+      this.$router.push('register');
+    }
+  }
 }
 </script>
 
@@ -69,6 +81,6 @@ export default {
 }
 .btn{
   width: 75%;
-  margin-top: 8px
+  margin-top: 8px;
 }
 </style>

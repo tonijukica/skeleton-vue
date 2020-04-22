@@ -1,23 +1,27 @@
 import axios from 'axios'
 const login = ({ commit }, { username, password }) => {
-  axios.post('api/login', {
+  return axios.post('api/login', {
     username,
     password
   })
-  .then((res) => {
+  .then(({data}) => {
+    const { user, token } = data;
     commit('login', { user, token });
-  })
-  .catch(err => {
-    commit('setError', {
-      msg: err.response.data
-    })
   });
 }
 const logout = ({commit}) => {
   commit('logout');
 }
+const register = (_, { username, email, password }) => {
+  return axios.post('api/register', {
+    username,
+    email,
+    password
+  });
+}
 
 export default {
   login,
-  logout
+  logout,
+  register
 }
