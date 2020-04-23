@@ -1,11 +1,10 @@
 const getUser = (state) => {
-  return state.user
-}
-const getError = (state) => {
-  return state.error
+  return {
+    user: state.user,
+    acessToken: state.acessToken
+  }
 }
 
 export default {
-  getUser,
-  getError
+  getUser
 }

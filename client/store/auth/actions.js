@@ -10,7 +10,7 @@ const login = ({ commit }, { username, password }) => {
   });
 }
 const logout = ({commit}) => {
-  commit('logout');
+  return commit('logout');
 }
 const register = (_, { username, email, password }) => {
   return axios.post('api/register', {
@@ -19,9 +19,12 @@ const register = (_, { username, email, password }) => {
     password
   });
 }
-
+const refresh = ({commit}, token) => {
+  return commit('refreshToken', token);
+}
 export default {
   login,
   logout,
-  register
+  register,
+  refresh
 }

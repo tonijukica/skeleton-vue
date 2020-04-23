@@ -4,8 +4,7 @@ import mutations from './mutations';
 
 const state = {
   user: null,
-  acessToken: null,
-  error: null
+  acessToken: null
 };
 
 export default {

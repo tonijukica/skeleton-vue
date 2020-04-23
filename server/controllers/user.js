@@ -84,7 +84,7 @@ router.get('/logout', (req, res) =>{
 router.get('/refresh', (req, res) => {
   const refreshToken = req.cookies.refreshToken;
   if(!refreshToken)
-    return res.status(401).send('No refresh token found');
+    return res.status(400).send('No refresh token found');
   const secret = process.env.JWT_SECRET;
   jwt.verify(refreshToken, secret, (err, data) => {
     if(err)

@@ -35,6 +35,8 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   if(to.matched.some(it => it.meta.protected) && !store.state.auth.user)
     next({ name: 'login' });
+  else if((to.name === 'login' || to.name === 'register') && store.state.auth.user)
+    next({ name: 'home'})
   else
     next();
 })

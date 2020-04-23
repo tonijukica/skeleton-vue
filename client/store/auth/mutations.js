@@ -1,5 +1,8 @@
 const login = (state, { user, token }) => {
-  state.user = user;
+  state.user = {
+    id: user.id,
+    username: user.username,
+  };
   state.acessToken = token;
 }
 
@@ -9,18 +12,19 @@ const logout = state => {
 }
 
 const setUser = (state, user) => {
-  state.user = user;
+  state.user = {
+    id: user.id,
+    username: user.username
+  };
 }
-const setError = (state, error) => {
-  state.error = error;
+
+const refreshToken = (state, token) => {
+  state.acessToken = token;
 }
-const clearError = (state) => {
-  state.error = null;
-}
+
 export default {
   login,
   logout,
   setUser,
-  setError,
-  clearError
+  refreshToken
 }

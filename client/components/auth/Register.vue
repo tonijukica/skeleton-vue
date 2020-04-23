@@ -2,6 +2,9 @@
   <v-container fluid="">
     <v-row justify="center" align-content="center">
       <v-col md="3" sm="6" align-self="center">
+        <v-alert :value="!!errMsg" type="error" text transition="fade-transition" dismissible >
+          {{errMsg}}
+        </v-alert>
         <v-sheet
           elevation="20"
           class="paper"
@@ -52,7 +55,8 @@ export default {
   data: () => ({
     username: '',
     email: '',
-    password: ''
+    password: '',
+    errMsg: ''
   }),
   methods: {
     ...mapActions(['register']),
@@ -65,7 +69,7 @@ export default {
       .then(() => {
         this.$router.push('login');
       })
-      .catch((err) => console.log(err.message))
+      .catch((err) => this.errMsg = err.response.data)
     }
   }
 }
