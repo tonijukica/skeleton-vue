@@ -5,6 +5,7 @@ import HelloWorld from './components/HelloWorld';
 import Login from './components/auth/Login'
 import Register from '@/components/auth/Register'
 import Profile from './components/Profile'
+import Layout from './components/layout/Layout'
 
 Vue.use(Router);
 
@@ -14,7 +15,18 @@ const router = new Router({
   routes: [{
     path: '/',
     name: 'home',
-    component: HelloWorld
+    component: Layout,
+    children: [{
+      path: '/',
+      name: 'home',
+      component: HelloWorld,
+    },{
+      path: 'profile',
+      name: 'profile',
+      component: Profile,
+      meta: { protected: true }
+    }
+  ]
   }, {
     path: '/login',
     name: 'login',
@@ -23,12 +35,7 @@ const router = new Router({
     path: '/register',
     name: 'register',
     component: Register,
-  }, {
-    path: '/profile',
-    name: 'profile',
-    component: Profile,
-    meta: { protected: true }
-  }
+  },
   ]
 });
 
