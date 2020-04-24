@@ -1,11 +1,11 @@
 import Router from "vue-router";
 import Vue from "vue";
-import store from './store';
-import HelloWorld from './components/HelloWorld';
-import Login from './components/auth/Login'
+import store from '@/store';
+import Home from '@/components/Home';
+import Login from '@/components/auth/Login'
 import Register from '@/components/auth/Register'
-import Profile from './components/Profile'
-import Layout from './components/layout/Layout'
+import Profile from '@/components/Profile'
+import Layout from '@/components/layout/Layout'
 
 Vue.use(Router);
 
@@ -19,7 +19,7 @@ const router = new Router({
     children: [{
       path: '/',
       name: 'home',
-      component: HelloWorld,
+      component: Home,
     },{
       path: 'profile',
       name: 'profile',

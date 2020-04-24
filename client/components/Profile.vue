@@ -3,6 +3,7 @@
     class="mx-auto box"
     max-width="320px"
   >
+    <v-icon x-large color="secondary">mdi-account-circle</v-icon>
     <h4>Username</h4>
     <span>{{username}}</span>
     <h4>Email</h4>
