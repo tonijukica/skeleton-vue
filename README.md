@@ -10,7 +10,7 @@
 - Clone this repo `git clone https://github.com/tonijukica/skeleton-vue.git`
 - Run `npm install` to install dependencies.
 - Create `.env` file and fill it out, use `.env.example` as an example.
-- Run `npm run db:init` to initialze database.
+- Run `npm run db:init` to initialize database.
 
 ## Development
 - `npm run dev:client` to run client dev server.
